@@ -4,7 +4,7 @@ import { Badge } from "./ui/badge";
 import { useParams } from "react-router-dom";
 import { setSingleJob } from "@/redux/jobSlice";
 import axios from "axios";
-import { applicationAPI, jobAPI } from "@/utiles/constant";
+// import { applicationAPI, jobAPI } from "@/utiles/constant";
 import { useDispatch, useSelector } from "react-redux";
 
 const JobDescription = () => {
@@ -14,8 +14,11 @@ const JobDescription = () => {
   const { user } = useSelector((store) => store.auth);
 
   //to update the ui after applying on job
-  const isIntiallyApplied = singleJob?.applications?.some(application => application.applicant === user?._id) || false;
-    const [isApplied, setIsApplied] = useState(isIntiallyApplied);
+  const isIntiallyApplied =
+    singleJob?.applications?.some(
+      (application) => application.applicant === user?._id
+    ) || false;
+  const [isApplied, setIsApplied] = useState(isIntiallyApplied);
 
   //params are use to get the Id
   const params = useParams();
@@ -27,28 +30,38 @@ const JobDescription = () => {
 
   const applyJobHandler = async () => {
     try {
-        const res = await axios.get(`${applicationAPI}/apply/${jobId}`, {withCredentials:true});
-        
-        if(res.data.success){
-            setIsApplied(true); // Update the local state
-            const updatedSingleJob = {...singleJob, applications:[...singleJob.applications,{applicant:user?._id}]}
-            dispatch(setSingleJob(updatedSingleJob)); // helps us to real time UI update
-            toast.success(res.data.message);
-
+      const res = await axios.get(
+        `https://job-portal-website-ctdi.onrender.com/apply/${jobId}`,
+        {
+          withCredentials: true,
         }
-    } catch (error) {
-        console.log(error);
-        toast.error(error.response.data.message);
-    }
-}
+      );
 
-//fetch the job
+      if (res.data.success) {
+        setIsApplied(true); // Update the local state
+        const updatedSingleJob = {
+          ...singleJob,
+          applications: [...singleJob.applications, { applicant: user?._id }],
+        };
+        dispatch(setSingleJob(updatedSingleJob)); // helps us to real time UI update
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message);
+    }
+  };
+
+  //fetch the job
   useEffect(() => {
     const fetchSingleJob = async () => {
       try {
-        const res = await axios.get(`${jobAPI}/get/${jobId}`, {
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          `https://job-portal-website-ctdi.onrender.com/get/${jobId}`,
+          {
+            withCredentials: true,
+          }
+        );
         if (res.data.success) {
           dispatch(setSingleJob(res.data.job));
         }
@@ -76,8 +89,8 @@ const JobDescription = () => {
             </Badge>
           </div>
         </div>
-        <Button 
-         onClick={isApplied ? null : applyJobHandler}
+        <Button
+          onClick={isApplied ? null : applyJobHandler}
           disabled={isApplied}
           className={`rounded-lg ${
             isApplied

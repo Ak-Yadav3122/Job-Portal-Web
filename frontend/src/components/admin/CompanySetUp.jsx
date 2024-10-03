@@ -15,10 +15,9 @@ import useGetCompanyById from "@/hooks/useGetCompanyById";
 
 //company setup
 const CompanySetUp = () => {
-
   const params = useParams();
   useGetCompanyById(params.id);
-  
+
   const [input, setInput] = useState({
     name: "",
     description: "",
@@ -26,7 +25,6 @@ const CompanySetUp = () => {
     location: "",
     file: null,
   });
-
 
   const { singleCompany } = useSelector((store) => store.company);
   const [loading, setLoading] = useState(false);
@@ -56,10 +54,10 @@ const CompanySetUp = () => {
     try {
       setLoading(true);
       const res = await axios.put(
-        `${comapnyAPI}/update/${params.id}`,
+        `https://job-portal-website-ctdi.onrender.com/update/${params.id}`,
         formData,
         {
-          method:'PUT',
+          method: "PUT",
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -87,7 +85,6 @@ const CompanySetUp = () => {
       file: singleCompany.file || null,
     });
   }, [singleCompany]);
-
 
   return (
     <div>

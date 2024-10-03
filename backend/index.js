@@ -25,7 +25,7 @@ app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 
 const corsOptions = {
-  origin:'mongodb://127.0.0.1:27017/',
+  origin:'https://job-portal-website-ctdi.onrender.com',
   credentials:true
 }
 

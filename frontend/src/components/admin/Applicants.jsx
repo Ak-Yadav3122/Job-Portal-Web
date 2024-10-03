@@ -5,7 +5,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setAllApplicants } from "@/redux/applicationSlice";
-import { applicationAPI } from "@/utiles/constant";
+// import { applicationAPI } from "@/utiles/constant";
 
 const Applicants = () => {
   const params = useParams();
@@ -16,9 +16,8 @@ const Applicants = () => {
     const fetchAllApplicants = async () => {
       try {
         const res = await axios.get(
-          `${applicationAPI}/${params.id}/applicants`,
-          { method:'GET',
-            withCredentials: true }
+          `https://job-portal-website-ctdi.onrender.com/${params.id}/applicants`,
+          { method: "GET", withCredentials: true }
         );
         dispatch(setAllApplicants(res.data.job));
       } catch (error) {

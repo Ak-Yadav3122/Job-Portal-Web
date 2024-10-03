@@ -1,5 +1,5 @@
 import { setAllJobs } from "@/redux/jobSlice";
-import { jobAPI } from "@/utiles/constant";
+// import { jobAPI } from "@/utiles/constant";
 import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,10 +10,13 @@ const useGetAllJobs = () => {
   useEffect(() => {
     const fetchAllJobs = async () => {
       try {
-        const res = await axios.get(`${jobAPI}/get?keyword=${searchedQuery}`, {
-          method: "GET",
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          `https://job-portal-website-ctdi.onrender.com/get?keyword=${searchedQuery}`,
+          {
+            method: "GET",
+            withCredentials: true,
+          }
+        );
         if (res.data.success) {
           dispatch(setAllJobs(res.data.jobs));
         }

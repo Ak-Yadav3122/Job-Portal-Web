@@ -6,7 +6,7 @@ import { RadioGroup } from "../ui/radio-group";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import axios from "axios";
-import { connectURL } from "@/utiles/constant";
+// import { connectURL } from "@/utiles/constant";
 import { toast } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading } from "@/redux/authSlice";
@@ -49,13 +49,17 @@ const SignUp = () => {
     }
     try {
       dispatch(setLoading(true));
-      const res = await axios.post(`${connectURL}/register`, formData, {
-        method: "POST", //important
-        withCredentials: "include", //important
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const res = await axios.post(
+        `https://job-portal-website-ctdi.onrender.com/register`,
+        formData,
+        {
+          method: "POST", //important
+          withCredentials: "include", //important
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       if (res.data.success) {
         navigate("/login");
         toast.success(res.data.message);

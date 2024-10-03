@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import { toast } from "sonner";
 import axios from "axios";
-import { connectURL } from "@/utiles/constant";
+// import { connectURL } from "@/utiles/constant";
 import { useDispatch, useSelector } from "react-redux";
 import { setAuthUser, setLoading } from "@/redux/authSlice";
 import { Loader2 } from "lucide-react";
@@ -39,13 +39,17 @@ const Login = () => {
     console.log(input);
     try {
       dispatch(setLoading(true));
-      const res = await axios.post(`${connectURL}/login`, input, {
-        method: "POST", //important to write
-        withCredentials: "include", //important to write
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const res = await axios.post(
+        `https://job-portal-website-ctdi.onrender.com/login`,
+        input,
+        {
+          method: "POST", //important to write
+          withCredentials: "include", //important to write
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       if (res.data.success) {
         dispatch(setAuthUser(res.data.user)); //for user profile after login
         navigate("/");

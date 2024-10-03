@@ -10,7 +10,7 @@ import { LogOut, User2 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { connectURL } from "@/utiles/constant";
+// import { connectURL } from "@/utiles/constant";
 import { setAuthUser } from "@/redux/authSlice";
 import { toast } from "sonner";
 
@@ -23,10 +23,13 @@ const Navbar = () => {
 
   const logoutHandler = async () => {
     try {
-      const res = await axios.get(`${connectURL}/logout`, {
-        method: "GET", //important
-        withCredentials: "include", //important
-      });
+      const res = await axios.get(
+        `https://job-portal-website-ctdi.onrender.com/logout`,
+        {
+          method: "GET", //important
+          withCredentials: "include", //important
+        }
+      );
       if (res.data.success) {
         dispatch(setAuthUser(null));
         navigate("/");

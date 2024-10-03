@@ -1,5 +1,5 @@
 import { setAllAdminJobs } from "@/redux/jobSlice";
-import { jobAPI } from "@/utiles/constant";
+// import { jobAPI } from "@/utiles/constant";
 import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -9,10 +9,13 @@ const useGetAllAdminJobs = () => {
   useEffect(() => {
     const fetchAllAdminJobs = async () => {
       try {
-        const res = await axios.get(`${jobAPI}/getadminjobs`, {
-          method:'GET',
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          `https://job-portal-website-ctdi.onrender.com/getadminjobs`,
+          {
+            method: "GET",
+            withCredentials: true,
+          }
+        );
         if (res.data.success) {
           dispatch(setAllAdminJobs(res.data.jobs));
         }

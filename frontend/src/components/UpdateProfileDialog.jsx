@@ -12,11 +12,9 @@ import { Button } from "./ui/button";
 import { Loader2 } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { connectURL } from "@/utiles/constant";
+// import { connectURL } from "@/utiles/constant";
 import { setAuthUser } from "@/redux/authSlice";
 import { toast } from "sonner";
-
-
 
 const UpdateProfileDialog = ({ open, setOpen }) => {
   const [loading, setLoading] = useState(false);
@@ -59,13 +57,17 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
 
     try {
       setLoading(true);
-      const res = await axios.post(`${connectURL}/profile/update`, formData, {
-        method:'POST', //important
-        withCredentials:'include',  //important
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const res = await axios.post(
+        `https://job-portal-website-ctdi.onrender.com/profile/update`,
+        formData,
+        {
+          method: "POST", //important
+          withCredentials: "include", //important
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       if (res.data.success) {
         dispatch(setAuthUser(res.data.user));
         toast.success(res.data.message);

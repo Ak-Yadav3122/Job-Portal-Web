@@ -16,7 +16,7 @@ import axios from "axios";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { Loader2 } from "lucide-react";
-import { jobAPI } from "@/utiles/constant";
+// import { jobAPI } from "@/utiles/constant";
 
 const companyArray = [];
 
@@ -40,7 +40,7 @@ const PostJob = () => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
-  // function to select the company 
+  // function to select the company
   const selectChangeHandler = (value) => {
     const selectedCompany = companies.find(
       (company) => company.name.toLowerCase() === value
@@ -52,13 +52,17 @@ const PostJob = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const res = await axios.post(`${jobAPI}/post`, input, {
-        method:'POST',
-        headers: {
-          "Content-Type": "application/json",
-        },
-        withCredentials: true,
-      });
+      const res = await axios.post(
+        `https://job-portal-website-ctdi.onrender.com/post`,
+        input,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
       if (res.data.success) {
         toast.success(res.data.message);
         navigate("/admin/jobs");

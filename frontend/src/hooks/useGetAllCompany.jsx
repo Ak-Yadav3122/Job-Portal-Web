@@ -1,5 +1,5 @@
 import { setCompanies } from "@/redux/companySlice";
-import { comapnyAPI } from "@/utiles/constant";
+// import { comapnyAPI } from "@/utiles/constant";
 import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -9,11 +9,13 @@ const useGetAllCompanies = () => {
   useEffect(() => {
     const fetchCompanies = async () => {
       try {
-        const res = await axios.get(`${comapnyAPI}/get`,
-           {
-          method:'GET',
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          `https://job-portal-website-ctdi.onrender.com/get`,
+          {
+            method: "GET",
+            withCredentials: true,
+          }
+        );
         console.log("called");
         if (res.data.success) {
           dispatch(setCompanies(res.data.companies));

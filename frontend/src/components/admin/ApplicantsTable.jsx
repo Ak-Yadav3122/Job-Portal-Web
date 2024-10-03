@@ -13,7 +13,7 @@ import { MoreHorizontal } from "lucide-react";
 import { useSelector } from "react-redux";
 import { toast } from "sonner";
 import axios from "axios";
-import { applicationAPI } from "@/utiles/constant";
+// import { applicationAPI } from "@/utiles/constant";
 
 const shortlistingStatus = ["Accepted", "Rejected"];
 
@@ -25,7 +25,7 @@ const ApplicantsTable = () => {
     try {
       axios.defaults.withCredentials = true;
       const res = await axios.post(
-        `${applicationAPI}/status/${id}/update`,
+        `https://job-portal-website-ctdi.onrender.com/status/${id}/update`,
         { status }
       );
       console.log(res);

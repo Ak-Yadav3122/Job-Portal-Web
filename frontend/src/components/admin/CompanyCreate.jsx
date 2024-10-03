@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import Navbar from "../shared/Navbar";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
@@ -6,7 +6,7 @@ import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { comapnyAPI } from "@/utiles/constant";
+// import { comapnyAPI } from "@/utiles/constant";
 import { toast } from "sonner";
 import { setSingleCompany } from "@/redux/companySlice";
 
@@ -19,10 +19,10 @@ const CompanyCreate = () => {
   const registerNewCompany = async () => {
     try {
       const res = await axios.post(
-        `${comapnyAPI}/register`,
+        `https://job-portal-website-ctdi.onrender.com/register`,
         { companyName },
         {
-          method:'POST',
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
